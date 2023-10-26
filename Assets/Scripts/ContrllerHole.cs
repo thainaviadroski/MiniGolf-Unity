@@ -4,22 +4,18 @@ using UnityEngine;
 
 public class ContrllerHole : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField] private float limitSpeedForDown;
+    [SerializeField] private AudioSource audioBallDown;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Ball")) {
-            FindAnyObjectByType<ControllerBolaGolf>().ShowAnimation();
+        if (collision.gameObject.CompareTag("Ball"))
+        {
+            if (collision.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude < limitSpeedForDown)
+            {
+                   audioBallDown.Play();
+                FindAnyObjectByType<ControllerBolaGolf>().ShowAnimation();
+            }
         }
     }
 }

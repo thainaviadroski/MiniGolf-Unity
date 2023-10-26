@@ -9,6 +9,8 @@ public class ControllerBolaGolf : MonoBehaviour
     [SerializeField] private new Camera camera;
 
     [SerializeField] private Animator animator;
+    [SerializeField] private AudioSource audioBall;
+    [SerializeField] private AudioSource audioBallDown;
 
     [SerializeField] private float forcaAdd;
     [SerializeField] private float limitMove;
@@ -95,10 +97,16 @@ public class ControllerBolaGolf : MonoBehaviour
 
         rigidbody.AddForce(-finalForce, ForceMode2D.Impulse);
 
+        audioBall.Play();
+
     }
 
     public void ShowAnimation()
     {
+        rigidbody.velocity = Vector2.zero;
         animator.Play("BallDown");
+        
+        Destroy(rigidbody.transform.gameObject, 1f);
+        Destroy(this.gameObject, 1f);
     }
 }

@@ -12,9 +12,10 @@ public class ContrllerHole : MonoBehaviour
         if (collision.gameObject.CompareTag("Ball"))
         {
             if (collision.gameObject.GetComponent<Rigidbody2D>().velocity.magnitude < limitSpeedForDown)
-            {
-                   audioBallDown.Play();
+            {                
                 FindAnyObjectByType<ControllerBolaGolf>().ShowAnimation();
+                audioBallDown.Play();
+                FindAnyObjectByType<GameManager>().callNextLevel();
             }
         }
     }
